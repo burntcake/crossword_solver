@@ -8,21 +8,21 @@ These words have less possible locations that they can be placed potentially red
 In the case that all words have the same length this sorting procedure will not provide any benefits.
 
 After this sort step the placement of words begins.
-
+```
 Pseudocode
-crossword //populated by user input
-def solve(locations, words, word_index)
-  // once all our words are exhausted then the correct solution has been found
-  if words_index == words.size
-    return true
-  for location in locations
-    if location.matches(word)
-      existing_chars = crossword.insert(word, location) // inserts word at a particular location and record any characters already there
-      if solve(locations, words, word_index+1)
+    crossword //populated by user input
+    def solve(locations, words, word_index)
+      // once all our words are exhausted then the correct solution has been found
+      if words_index == words.size
         return true
-      crossword.revert  //reverts the crossword to the state before the insert using the information from existing chars
-  return false
-
+      for location in locations
+        if location.matches(word)
+          existing_chars = crossword.insert(word, location) // inserts word at a particular location and record any characters already there
+          if solve(locations, words, word_index+1)
+            return true
+          crossword.revert  //reverts the crossword to the state before the insert using the information from existing chars
+      return false
+```
 
 For every word, the solver explores every location the word could possibly be placed. If a branch reaches a state where there is no 
 possible location to insert the word i.e. the word would overwrite letters that have been already placed by other words intersecting
